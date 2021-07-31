@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load filters %}
+{% block head_page %}
+<head>
+  <meta charset="UTF-8">
+  <title>Вакансии компании | Джуманджи</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    body {
+      background-color: #F6F2E6;
+    }
+  </style>
+{% endblock %}
+{% block main_bloc %}
+<main class="container mt-3 pb-5">
+  <div class="row mt-5">
+    <div class="col-12 col-lg-4">
+      <aside class="pt-3 pb-4 px-4 mb-5 card">
+        <h1 class="h4 pt-2 pb-2">Моя компания</h1>
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <a class="nav-link" href="{%url 'mycompany_edit'%}">1. Информация о&nbsp;компании</a>
+          <a class="nav-link active" href="{%url 'mycompany_vacancies'%}">2. Вакансии</a>
+        </div>
+      </aside>
+    </div>
+    <div class="col-12 col-lg-8">
+      <div class="card">
+        <div class="card-body px-4 pb-4">
+          <section class="tab-pane fade show active">
+            <h2 class="h4 pt-2 pb-3">Вакансии</h2>
+            {%if object_list.count == 0%}
+            <p class="alert alert-info" role="alert">
+              У вас пока нет вакансий, но вы можете создать первую
+            </p>
+            {%endif%}
+            <a href="{% url 'mycompany_vacancy_create' %}" type="submit" class="btn btn-info" >Добавить вакансию</a>
+            {% for vacancy in object_list %}
+            <div class="card mt-3">
+              <div class="card-body px-4">
+                <div class="row align-items-center">
+                  <div class="col-6 col-lg-8">
+                    <a href="{%url 'vacancy' vacancy.id%}" class="mb-1">{{vacancy.title}}</a>
+                    <p class="mb-1">
+                      <span class="mr-4">{{vacancy.salary_max}}</span><a href="#" class="text-info">{{vacancy.applications.count}} {{vacancy.applications.count|rus_plural_endings_2:'отклик'}}</a>
+                    </p>
+                  </div>
+                  <div class="col-6 col-lg-4 text-right">
+                    <a href="{%url 'mycompany_vacancy' vacancy.id%}" class="btn btn-outline-info">Изменить</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {%endfor%}
+          </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

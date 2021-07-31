@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block head_page %}
+<head>
+  <meta charset="UTF-8">
+  <title>Создать карточку компании | Джуманджи</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    body {
+      background-color: #F6F2E6;
+    }
+  </style>
+</head>
+{% endblock %}
+{% block main_bloc %}
+  <main class="container mt-3 pb-5">
+    <section class="col-12 col-lg-6 offset-lg-3 mt-5 card">
+      <div class="card-body px-3 pb-4">
+        <h1 class="h4 pt-2">Моя компания</h1>
+        <p class="mt-2">Пока мы думаем, что вы – частное лицо. Хотите создать карточку компании, разместить информаию и вакансии?</p>
+        <a href="{% url 'mycompany_create' %}" class="btn btn-info mb-2">Создать карточку компании</a>
+      </div>
+    </section>
+  </main>
+{% endblock %}
